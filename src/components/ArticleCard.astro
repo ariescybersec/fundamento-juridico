@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { articulo: CollectionEntry<'articulos'> }
+const { articulo } = Astro.props;
+const { title, description, tag, date, readingTime } = articulo.data;
+const dateStr = date.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+---
+<article class="fj-article-card">
+  <div class="fj-article-img">
+    <div class="fj-img-pattern"></div>
+    <span class="fj-article-tag">{tag}</span>
+  </div>
+  <div class="fj-article-body">
+    <h3><a href={`/articulos/${articulo.slug}`}>{title}</a></h3>
+    <p>{description}</p>
+    <div class="fj-article-meta">
+      <span>📅 {dateStr}</span>
+      <span>⏱ {readingTime} min</span>
+    </div>
+    <a href={`/articulos/${articulo.slug}`} class="fj-article-readmore">Leer más →</a>
+  </div>
+</article>

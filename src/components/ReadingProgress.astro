@@ -1,0 +1,11 @@
+<div class="fj-reading-progress" aria-hidden="true"><span></span></div>
+
+<script>
+  const bar = document.querySelector('.fj-reading-progress span') as HTMLElement;
+  if (bar) {
+    window.addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = Math.min(100, (window.scrollY / max) * 100) + '%';
+    }, { passive: true });
+  }
+</script>

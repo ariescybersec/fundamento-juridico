@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const articulos = await getCollection('articulos');
+  const tags = [...new Set(articulos.map(a => a.data.tag))];
+  return tags.map(tag => ({
+    params: { tag },
+    props: {
+      tag,
+      articulos: articulos
+        .filter(a => a.data.tag === tag)
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+
+const { tag, articulos } = Astro.props;
+const tagClass: Record<string,string> = {
+  'Derecho Penal': 'fj-tag-penal',
+  'Compliance': 'fj-tag-compliance',
+  'Ciberseguridad': 'fj-tag-ciber',
+  'IA & Tech': 'fj-tag-ia',
+  'Laboral': 'fj-tag-laboral',
+};
+---
+<BaseLayout title={`Artículos de ${tag}`} description={`Todos los artículos sobre ${tag} en Fundamento Jurídico.`}>
+  <Header />
+  <section class="fj-section">
+    <div class="fj-section-inner">
+      <div class="fj-section-header">
+        <h2>{tag}</h2>
+        <p>{articulos.length} artículo{articulos.length !== 1 ? 's' : ''} publicado{articulos.length !== 1 ? 's' : ''}</p>
+        <div class="fj-gold-line"></div>
+      </div>
+
+      <div class="fj-recent-list">
+        {articulos.map(a => {
+          const dateStr = a.data.date.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+          return (
+            <a href={`/articulos/${a.slug}`} class="fj-recent-item">
+              <span class={`fj-recent-tag ${tagClass[a.data.tag]}`}>{a.data.tag}</span>
+              <div class="fj-recent-content">
+                <h4>{a.data.title}</h4>
+                <p>{a.data.description}</p>
+              </div>
+              <span class="fj-recent-meta">{dateStr}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+  <Footer />
+</BaseLayout>

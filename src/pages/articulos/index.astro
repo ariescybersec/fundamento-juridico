@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const articulos = (await getCollection('articulos'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const tags = [...new Set(articulos.map(a => a.data.tag))];
+---
+<BaseLayout title="Todos los artículos" description="Explora todos los artículos de Fundamento Jurídico.">
+  <Header />
+
+  <section class="fj-section">
+    <div class="fj-section-inner">
+      <div class="fj-section-header">
+        <h2>Todos los artículos</h2>
+        <p>Explora el archivo completo de Fundamento Jurídico</p>
+        <div class="fj-gold-line"></div>
+      </div>
+
+      <div class="fj-filters" role="group" aria-label="Filtrar por categoría">
+        <button class="fj-filter-chip active" data-filter="all">Todos ({articulos.length})</button>
+        {tags.map(tag => (
+          <button class="fj-filter-chip" data-filter={tag}>
+            {tag} ({articulos.filter(a => a.data.tag === tag).length})
+          </button>
+        ))}
+      </div>
+
+      <div class="fj-recent-list" id="articles-list">
+        {articulos.map(a => {
+          const dateStr = a.data.date.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+          const tagClass: Record<string,string> = {
+            'Derecho Penal': 'fj-tag-penal',
+            'Compliance': 'fj-tag-compliance',
+            'Ciberseguridad': 'fj-tag-ciber',
+            'IA & Tech': 'fj-tag-ia',
+            'Laboral': 'fj-tag-laboral',
+          };
+          return (
+            <a href={`/articulos/${a.slug}`} class="fj-recent-item" data-tag={a.data.tag}>
+              <span class={`fj-recent-tag ${tagClass[a.data.tag]}`}>{a.data.tag}</span>
+              <div class="fj-recent-content">
+                <h4>{a.data.title}</h4>
+                <p>{a.data.description}</p>
+              </div>
+              <span class="fj-recent-meta">{dateStr}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const chips = document.querySelectorAll<HTMLButtonElement>('.fj-filter-chip');
+  const items = document.querySelectorAll<HTMLElement>('#articles-list .fj-recent-item');
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const filter = chip.dataset.filter!;
+      items.forEach(item => {
+        item.style.display = filter === 'all' || item.dataset.tag === filter ? '' : 'none';
+      });
+    });
+  });
+</script>

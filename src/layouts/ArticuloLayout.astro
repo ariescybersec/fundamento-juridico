@@ -1,0 +1,65 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import NewsletterForm from '../components/NewsletterForm.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogImage?: string;
+  jsonLd: Record<string, unknown>;
+  tag: string;
+  date: Date;
+  author: string;
+  readingTime: number;
+}
+
+const { title, description, canonical, ogImage, jsonLd, tag, date, author, readingTime } = Astro.props;
+const dateStr = date.toLocaleDateString('es-PE', { day: '2-digit', month: 'long', year: 'numeric' });
+---
+<BaseLayout title={title} description={description} canonical={canonical} ogImage={ogImage} jsonLd={jsonLd}>
+  <ReadingProgress />
+  <Header />
+
+  <article class="fj-article-page">
+    <div class="fj-article-page-inner">
+      <nav class="fj-breadcrumb" aria-label="Ruta de navegación">
+        <a href="/">Inicio</a> / <a href="/articulos">Artículos</a> / <span>{tag}</span>
+      </nav>
+
+      <span class="fj-article-tag-inline">{tag}</span>
+      <h1>{title}</h1>
+      <p class="fj-article-lead">{description}</p>
+
+      <div class="fj-article-info">
+        <span>Por <strong>{author}</strong></span>
+        <span>•</span>
+        <time datetime={date.toISOString()}>{dateStr}</time>
+        <span>•</span>
+        <span>{readingTime} min de lectura</span>
+      </div>
+
+      <ShareButtons title={title} url={canonical} />
+
+      <div class="fj-article-content">
+        <slot />
+      </div>
+
+      <ShareButtons title={title} url={canonical} />
+
+      <div class="fj-article-back">
+        <a href="/articulos" class="fj-btn fj-btn-outline-dark">← Volver a artículos</a>
+      </div>
+    </div>
+  </article>
+
+  <section class="fj-newsletter" id="newsletter">
+    <NewsletterForm />
+  </section>
+
+  <Footer />
+</BaseLayout>

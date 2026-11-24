@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props { articulo: CollectionEntry<'articulos'> }
+const { articulo } = Astro.props;
+const { title, description, tag, date } = articulo.data;
+const dateStr = date.toLocaleDateString('es-PE', { day: '2-digit', month: 'short', year: 'numeric' });
+const tagClass: Record<string, string> = {
+  'Derecho Penal': 'fj-tag-penal',
+  'Compliance': 'fj-tag-compliance',
+  'Ciberseguridad': 'fj-tag-ciber',
+  'IA & Tech': 'fj-tag-ia',
+  'Laboral': 'fj-tag-laboral',
+};
+---
+<a href={`/articulos/${articulo.slug}`} class="fj-recent-item" data-tag={tag}>
+  <span class={`fj-recent-tag ${tagClass[tag]}`}>{tag}</span>
+  <div class="fj-recent-content">
+    <h4>{title}</h4>
+    <p>{description}</p>
+  </div>
+  <span class="fj-recent-meta">{dateStr}</span>
+</a>

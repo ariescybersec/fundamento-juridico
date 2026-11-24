@@ -1,0 +1,65 @@
+---
+const current = Astro.url.pathname;
+const navItems = [
+  { href: '/', label: 'Inicio' },
+  { href: '/articulos', label: 'Artículos' },
+  { href: '/categorias/Derecho Penal', label: 'Análisis' },
+  { href: '/categorias/Compliance', label: 'Compliance & Tech' },
+  { href: '/sobre', label: 'Sobre Nosotros' },
+  { href: '/#newsletter', label: 'Newsletter' },
+  { href: '/contacto', label: 'Contacto' },
+];
+---
+<header class="fj-header">
+  <div class="fj-header-inner">
+    <a href="/" class="fj-logo">
+      <img src="/img/logo-oscuro.png" alt="Fundamento Jurídico" class="fj-logo-mark" />
+      Fundamento Jurídico
+    </a>
+
+    <nav class="fj-nav" aria-label="Navegación principal">
+      {navItems.map(item => (
+        <a href={item.href} class={current === item.href ? 'active' : ''}>{item.label}</a>
+      ))}
+      <a href="/#newsletter" class="fj-btn fj-btn-gold">Suscríbete</a>
+    </nav>
+
+    <button
+      class="fj-mobile-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      id="menu-toggle"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="fj-mobile-nav" id="mobile-nav" aria-label="Menú móvil">
+    {navItems.map(item => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+    <a href="/#newsletter" class="fj-btn fj-btn-gold">Suscríbete Gratis</a>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')!;
+  const nav = document.getElementById('mobile-nav')!;
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('active');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.classList.toggle('active', open);
+  });
+  nav.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      nav.classList.remove('active');
+      toggle.classList.remove('active');
+      toggle.setAttribute('aria-expanded', 'false');
+    })
+  );
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('.fj-header') as HTMLElement;
+    header.style.boxShadow = window.scrollY > 10 ? '0 2px 12px rgba(10,25,47,0.08)' : 'none';
+  });
+</script>

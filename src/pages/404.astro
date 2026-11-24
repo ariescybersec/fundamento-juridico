@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout title="Página no encontrada" description="La página que buscas no existe.">
+  <Header />
+  <section class="fj-section" style="text-align:center; padding: 120px 24px;">
+    <div class="fj-section-inner">
+      <h1 style="font-size: 72px; color: var(--fj-gold);">404</h1>
+      <h2>Página no encontrada</h2>
+      <p style="margin: 16px auto 32px; max-width: 480px; color: var(--fj-gray-500);">
+        La página que buscas no existe o fue movida.
+      </p>
+      <a href="/" class="fj-btn fj-btn-dark">Volver al inicio</a>
+    </div>
+  </section>
+  <Footer />
+</BaseLayout>

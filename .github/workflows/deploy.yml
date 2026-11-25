@@ -1,0 +1,30 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Se ejecuta cada vez que haces push a la rama main
+  push:
+    branches: [ main ]
+  # Permite ejecutarlo manualmente desde la pestaña Actions
+  workflow_dispatch:
+
+# Permisos necesarios para publicar en GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Permite una sola implementación concurrente
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Instalar, construir y subir el sitio
+        uses: withastro/action@v3
+        # Esta acción oficial de Astro hace todo el trabajo pesado:
+        # instala dependencias, corre "npm run build" y sube la carpeta dist

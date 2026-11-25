@@ -21,13 +21,35 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 1. Configuramos Node.js 24 manualmente
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: 'npm'
 
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
+      # 2. Instalamos las dependencias
+      - name: Install dependencies
+        run: npm ci
+
+      # 3. Construimos el sitio (Astro usará el Node 24 que configuramos)
+      - name: Build site
+        run: npm run build
+
+      # 4. Subimos el sitio construido a GitHub Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          package-manager: npm@latest
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

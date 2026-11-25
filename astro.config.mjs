@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://ariescybersec.github.io',
-  base: '/fundamento-juridico',
+  base: '/fundamento-juridico', // ¡Esto es vital!
   integrations: [sitemap()],
   markdown: {
     shikiConfig: { theme: 'github-light' },

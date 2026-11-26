@@ -1,4 +1,5 @@
 ---
+import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
@@ -50,8 +51,6 @@ const siteName = 'Fundamento Jurídico';
   {jsonLd && (
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   )}
-
-  <link rel="stylesheet" href="/src/styles/global.css" />
 </head>
 <body>
   <slot />

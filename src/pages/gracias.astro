@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout 
+  title="¡Mensaje Enviado!" 
+  description="Gracias por ponerte en contacto con Fundamento Jurídico."
+>
+  <Header />
+
+  <section class="fj-section" style="min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+    <div class="fj-section-inner" style="max-width: 600px;">
+      
+      <!-- Icono de Check -->
+      <div style="width: 80px; height: 80px; background: rgba(201, 169, 97, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--fj-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+
+      <h1 style="font-size: clamp(32px, 5vw, 42px); margin-bottom: 16px; color: var(--fj-navy);">
+        ¡Mensaje Enviado con Éxito!
+      </h1>
+      
+      <div class="fj-gold-line" style="margin: 0 auto 24px;"></div>
+
+      <p style="font-size: 18px; color: var(--fj-gray-600); line-height: 1.7; margin-bottom: 40px;">
+        Gracias por escribirnos. Hemos recibido tu mensaje y nuestro equipo editorial lo revisará a la brevedad posible. 
+        <br/><br/>
+        Si tu consulta es sobre una colaboración o publicación, te responderemos directamente a tu correo.
+      </p>
+
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="/" class="fj-btn fj-btn-dark">Volver al Inicio</a>
+        <a href="/articulos" class="fj-btn fj-btn-outline-dark">Explorar Artículos</a>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

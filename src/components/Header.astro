@@ -1,13 +1,25 @@
 ---
 const current = Astro.url.pathname;
+
+// Creamos la nueva estructura de navegación
 const navItems = [
   { href: '/', label: 'Inicio' },
   { href: '/articulos', label: 'Artículos' },
-  { href: '/categorias/Derecho Penal', label: 'Análisis' },
-  { href: '/categorias/Compliance', label: 'Compliance & Tech' },
   { href: '/sobre', label: 'Sobre Nosotros' },
   { href: '/#newsletter', label: 'Newsletter' },
   { href: '/contacto', label: 'Contacto' },
+];
+
+// Aquí van todas las ramas del derecho que quieres abarcar
+const categorias = [
+  { href: '/categorias/Derecho Penal', label: 'Derecho Penal' },
+  { href: '/categorias/Compliance', label: 'Compliance' },
+  { href: '/categorias/Ciberseguridad', label: 'Ciberseguridad' },
+  { href: '/categorias/IA & Tech', label: 'IA & Tech' },
+  { href: '/categorias/Derecho Civil', label: 'Derecho Civil' },
+  { href: '/categorias/Derecho Laboral', label: 'Derecho Laboral' },
+  { href: '/categorias/Derecho Administrativo', label: 'Derecho Administrativo' },
+  { href: '/categorias/Derecho Tributario', label: 'Derecho Tributario' },
 ];
 ---
 <header class="fj-header">
@@ -17,8 +29,24 @@ const navItems = [
       Fundamento Jurídico
     </a>
 
-    <nav class="fj-nav" aria-label="Navegación principal">
-      {navItems.map(item => (
+        <nav class="fj-nav" aria-label="Navegación principal">
+      {navItems.slice(0, 2).map(item => ( // Inicio y Artículos
+        <a href={item.href} class={current === item.href ? 'active' : ''}>{item.label}</a>
+      ))}
+      
+      <!-- Menú Desplegable -->
+      <div class="fj-dropdown">
+        <a href="#" class="fj-dropdown-toggle">
+          Campos <span class="fj-arrow">▾</span>
+        </a>
+        <ul class="fj-dropdown-menu">
+          {categorias.map(cat => (
+            <li><a href={cat.href}>{cat.label}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      {navItems.slice(2).map(item => ( // El resto de enlaces
         <a href={item.href} class={current === item.href ? 'active' : ''}>{item.label}</a>
       ))}
       <a href="/#newsletter" class="fj-btn fj-btn-gold">Suscríbete</a>

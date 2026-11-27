@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://ariescybersec.github.io',
-  base: '/fundamento-juridico', // ¡Esto es vital!
+  site: 'https://fundamentojuridico.com', 
+  // base: '/fundamento-juridico',  <-- ELIMINA ESTA LÍNEA COMPLETAMENTE
   integrations: [sitemap()],
   markdown: {
     shikiConfig: { theme: 'github-light' },

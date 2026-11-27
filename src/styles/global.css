@@ -741,7 +741,14 @@ ul { list-style: none; }
 }
 .fj-team-member h3 {
   font-size: 22px;
-  margin-bottom: 8px;
+  margin-bottom: 8px;  
+}
+.fj-team-degree {
+  font-size: 14px;
+  color: var(--fj-gray-600);
+  font-weight: 500;
+  margin-bottom: 12px;
+  font-style: italic;
 }
 .fj-team-member span {
   display: inline-block;

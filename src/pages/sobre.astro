@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout 
+  title="Sobre Nosotros" 
+  description="Conoce al equipo detrás de Fundamento Jurídico. Estudiantes y graduados de derecho apasionados por la profesión."
+>
+  <Header />
+
+  <!-- Hero Section -->
+  <section class="fj-about-hero">
+    <div class="fj-section-inner">
+      <h1>Sobre Nosotros</h1>
+      <p>Somos estudiantes y graduados de derecho que amamos esta profesión y todo lo hacemos de corazón.</p>
+    </div>
+  </section>
+
+  <!-- Historia y Misión/Visión -->
+  <section class="fj-section">
+    <div class="fj-section-inner">
+      <div class="fj-section-header" style="text-align: left; margin-bottom: 24px;">
+        <h2>Nuestra Historia</h2>
+        <div class="fj-gold-line" style="margin: 16px 0;"></div>
+        <p style="margin: 0; max-width: 100%;">
+          Fundamento Jurídico nace como un espacio de análisis riguroso para profesionales y empresas que buscan comprender y prevenir los riesgos legales en la era digital. Combinamos nuestra pasión por el derecho con el compromiso de ofrecer contenido de alto valor académico y práctico, fundamentado en la legislación peruana vigente y las mejores prácticas internacionales.
+        </p>
+      </div>
+
+      <div class="fj-mv-grid">
+        <div class="fj-mv-card">
+          <h3>Misión</h3>
+          <p>Democratizar el conocimiento jurídico de calidad, proporcionando análisis profundos y herramientas prácticas en derecho corporativo, compliance y nuevas tecnologías. Buscamos empoderar a profesionales y empresas para que naveguen el complejo entorno legal con seguridad y confianza.</p>
+        </div>
+        <div class="fj-mv-card">
+          <h3>Visión</h3>
+          <p>Convertirnos en la revista jurídica digital de referencia en el Perú y Latinoamérica, reconocida por nuestra rigurosidad académica, nuestra capacidad de anticipar los desafíos legales de la tecnología y por fomentar una comunidad activa de profesionales del derecho comprometidos con la excelencia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipo -->
+  <section class="fj-section" style="background-color: var(--fj-gray-100);">
+    <div class="fj-section-inner">
+      <div class="fj-section-header">
+        <h2>Nuestro Equipo</h2>
+        <p>Las mentes detrás de Fundamento Jurídico</p>
+        <div class="fj-gold-line"></div>
+      </div>
+
+      <div class="fj-team-grid">
+        <!-- Miembro 1 -->
+        <div class="fj-team-member">
+          <div class="fj-team-avatar">YH</div>
+          <h3>Yan Fidel Huaman Garcia</h3>
+          <span>Fundador y Editor General</span>
+          <p>Apasionado por el derecho y la tecnología. Encargado de la visión estratégica, la línea editorial y el desarrollo de la plataforma digital.</p>
+        </div>
+
+        <!-- Miembro 2 -->
+        <div class="fj-team-member">
+          <div class="fj-team-avatar">DR</div>
+          <h3>Dayssi Nallely Rivas Torres</h3>
+          <span>Cofundadora y Editora</span>
+          <p>Comprometida con la excelencia jurídica. Responsable de la revisión de contenido, el análisis normativo y la articulación de los artículos de la revista.</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 48px;">
+        <p style="color: var(--fj-gray-500); font-style: italic;">
+          Próximamente se unirán más profesionales a nuestro equipo editorial.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

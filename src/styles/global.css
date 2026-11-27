@@ -663,3 +663,101 @@ ul { list-style: none; }
   .fj-share { gap: 8px; }
   .fj-share a, .fj-share button { width: 32px; height: 32px; }
 }
+
+/* ===== PÁGINA SOBRE NOSOTROS ===== */
+.fj-about-hero {
+  background: linear-gradient(135deg, var(--fj-navy) 0%, var(--fj-navy-light) 100%);
+  color: var(--fj-white);
+  padding: 80px 24px;
+  text-align: center;
+}
+.fj-about-hero h1 {
+  color: var(--fj-white);
+  font-size: clamp(32px, 5vw, 48px);
+  margin-bottom: 16px;
+}
+.fj-about-hero p {
+  color: rgba(255,255,255,0.8);
+  font-size: 18px;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.fj-mv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+.fj-mv-card {
+  background: var(--fj-gray-100);
+  padding: 40px;
+  border-radius: var(--fj-radius-lg);
+  border-left: 4px solid var(--fj-gold);
+}
+.fj-mv-card h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: var(--fj-navy);
+}
+.fj-mv-card p {
+  color: var(--fj-gray-600);
+  line-height: 1.7;
+}
+
+.fj-team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-top: 48px;
+}
+.fj-team-member {
+  text-align: center;
+  background: var(--fj-white);
+  padding: 40px 24px;
+  border-radius: var(--fj-radius-lg);
+  box-shadow: var(--fj-shadow-sm);
+  border: 1px solid var(--fj-gray-200);
+  transition: var(--fj-transition);
+}
+.fj-team-member:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--fj-shadow-md);
+}
+.fj-team-avatar {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  background: var(--fj-navy);
+  color: var(--fj-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+}
+.fj-team-member h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+.fj-team-member span {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--fj-gold);
+  margin-bottom: 16px;
+}
+.fj-team-member p {
+  color: var(--fj-gray-500);
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .fj-mv-grid, .fj-team-grid { grid-template-columns: 1fr; gap: 24px; }
+  .fj-mv-card { padding: 24px; }
+}
